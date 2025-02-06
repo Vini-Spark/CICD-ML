@@ -25,7 +25,7 @@ update-branch:
 
 hf-login:
 		pip install -U "huggingface_hub[cli]"
-		git pull origin update
+		git pull --no-edit origin update  # Auto-merge without opening an editor
 		git switch update
 		huggingface-cli login --token ${{ secrets.HF }} --add-to-git-credential
 
