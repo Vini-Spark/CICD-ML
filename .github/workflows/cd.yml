@@ -3,9 +3,7 @@ on:
   workflow_run:
     workflows: ["Continuous Integration"]
     types:
-      - completed
-    secrets: inherit
-    
+      - completed 
 
   workflow_dispatch:
 
@@ -15,21 +13,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-        
-      - name: Debug Hugging Face Token
-        env:
-          secrets: inherit
-          HF_TOKEN: ${{ secrets.TEST_SECRET }}
-        run: |
-          if [ -z "$HF_TOKEN" ]; then
-            echo "❌ HF_TOKEN is empty!"
-            exit 1
-          else
-            echo "✅ HF_TOKEN is set with length: ${#HF_TOKEN}"
-          fi
+      - uses: ./.github/workflows/ci.yml
+        secrets: inherit
 
       - name: Deployment To Hugging Face
         env:
-          secrets: inherit
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: make deploy HF=$HF_TOKEN
