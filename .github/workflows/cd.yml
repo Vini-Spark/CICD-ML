@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+        
       - name: Verify Hugging Face Token
         env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          secrets: inherit
           HF_TOKEN: ${{ secrets.USER_NAME }}
         run: echo "HF_TOKEN=$HF_TOKEN"
 
@@ -32,5 +32,6 @@ jobs:
 
       - name: Deployment To Hugging Face
         env:
+          secrets: inherit
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: make deploy HF=$HF_TOKEN
