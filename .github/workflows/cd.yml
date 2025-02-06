@@ -4,23 +4,21 @@ on:
     workflows: ["Continuous Integration"]
     types:
       - completed
+    secrets: inherit
+    
 
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v3
         
-      - name: Verify Hugging Face Token
-        env:
-          secrets: inherit
-          HF_TOKEN: ${{ secrets.USER_NAME }}
-        run: echo "HF_TOKEN=$HF_TOKEN"
-
       - name: Debug Hugging Face Token
         env:
+          secrets: inherit
           HF_TOKEN: ${{ secrets.TEST_SECRET }}
         run: |
           if [ -z "$HF_TOKEN" ]; then
