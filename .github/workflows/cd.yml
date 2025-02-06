@@ -16,7 +16,7 @@ jobs:
       - name: Verify Hugging Face Token
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HF_TOKEN: ${{ secrets.TEST_SECRET }}
+          HF_TOKEN: ${{ secrets.USER_NAME }}
         run: echo "HF_TOKEN=$HF_TOKEN"
 
       - name: Debug Hugging Face Token
