@@ -15,12 +15,12 @@ jobs:
 
       - name: Verify Hugging Face Token
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.TEST_SECRET }}
         run: echo "HF_TOKEN=$HF_TOKEN"
 
       - name: Debug Hugging Face Token
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.TEST_SECRET }}
         run: |
           if [ -z "$HF_TOKEN" ]; then
             echo "❌ HF_TOKEN is empty!"
