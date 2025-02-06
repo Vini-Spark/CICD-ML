@@ -16,8 +16,8 @@ jobs:
       - name: Verify Hugging Face Token
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: echo "HF_TOKEN=${HF_TOKEN}"
-        
+        run: echo "HF_TOKEN=$HF_TOKEN"
+
       - name: Debug Hugging Face Token
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -31,5 +31,5 @@ jobs:
 
       - name: Deployment To Hugging Face
         env:
-          HF: ${{ secrets.HF_TOKEN }}
-        run: make deploy HF=$HF
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: make deploy HF=$HF_TOKEN
