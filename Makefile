@@ -8,7 +8,7 @@ format:
 train:
 		python train.py
 
-eval:git add .github/workflows/your-workflow.yml
+eval:
 		echo "## Model Metrics" > report.md
 		cat ./Results/metrics.txt >> report.md
 
