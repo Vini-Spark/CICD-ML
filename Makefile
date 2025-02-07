@@ -35,5 +35,4 @@ push-hub:
 		huggingface-cli upload ViniSpark/Drug-Classification ./Results /Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy: 
-		$(MAKE) hf-login
-		$(MAKE) push-hub
+		hf-login push-hub
