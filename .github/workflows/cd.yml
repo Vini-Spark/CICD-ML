@@ -11,4 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deployment To Hugging Face
-        run: make deploy HF=${{ secrets.HF_TEST }}
+        env:
+          HF: ${{ secrets.HF_TOKEN }}
+        run: make deploy HF=$HF
