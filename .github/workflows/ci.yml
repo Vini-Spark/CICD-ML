@@ -28,11 +28,10 @@ jobs:
           NAME: ${{ secrets.USER_NAME }}
           EMAIL: ${{ secrets.USER_EMAIL }}
         run: make update-branch USER_NAME=$NAME USER_EMAIL=$EMAIL
-
   deploy:
     needs: build
     uses: ./.github/workflows/cd.yml
-    with:
+    secrets:
       hf_token: ${{ secrets.HF_TOKEN }}
 
     
