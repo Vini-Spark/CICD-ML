@@ -32,6 +32,6 @@ jobs:
     needs: build
     uses: ./.github/workflows/cd.yml
     secrets:
-      hf_token: ${{ secrets.HF_TOKEN }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
 
     
