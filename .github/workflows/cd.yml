@@ -2,7 +2,7 @@ name: Continuous Deployment
 on:
   workflow_call:
     secrets:
-      HF_TOKEN:
+      HF_TEST:
         required: true
 
 jobs:
@@ -11,10 +11,10 @@ jobs:
     steps:
 
       - name: Check HF_TOKEN
-        run: test -n "$HF_TOKEN" || (echo "HF_TOKEN is empty" && exit 1)
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          
+          HF_TEST: ${{ secrets.HF_TEST }}
+        run: test -n "$HF_TEST" || (echo "HF_TOKEN is empty" && exit 1)
+
       - uses: actions/checkout@v3
       - name: Deployment To Hugging Face
-        run: make deploy HF=${{ secrets.HF_TOKEN }}
+        run: make deploy HF=${{ secrets.HF_TEST }}

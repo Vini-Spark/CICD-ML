@@ -30,14 +30,14 @@ jobs:
         run: make update-branch USER_NAME=$NAME USER_EMAIL=$EMAIL
 
       - name: Check HF_TOKEN
-        run: test -n "$HF_TOKEN" || (echo "HF_TOKEN is empty" && exit 1)
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF: ${{ secrets.HF_TEST }}
+        run: test -n "$HF" || (echo "HF_TOKEN is empty" && exit 1)
           
   deploy:
     needs: build
     uses: ./.github/workflows/cd.yml
     secrets:
-      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_TEST: ${{ secrets.HF_TEST }}
 
     
