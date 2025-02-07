@@ -18,8 +18,8 @@ eval:
 		cml comment create report.md
 
 update-branch:
-		git config --global user.name "${{ secrets.USER_NAME }}"
-		git config --global user.email "${{ secrets.USER_EMAIL }}"
+		git config --global user.name $(USER_NAME)
+		git config --global user.email $(USER_EMAIL)
 		git commit -am "Update with new results"
 		git push --force origin HEAD:update
 
@@ -27,7 +27,7 @@ hf-login:
 		pip install -U "huggingface_hub[cli]"
 		git pull --no-edit origin update  # Auto-merge without opening an editor
 		git switch update
-		huggingface-cli login --token ${{ secrets.HF_TEST }} --add-to-git-credential
+		huggingface-cli login --token $(HF)  --add-to-git-credential
 
 push-hub:
 		huggingface-cli upload ViniSpark/Drug-Classification ./App --repo-type=space --commit-message="Sync App files"
