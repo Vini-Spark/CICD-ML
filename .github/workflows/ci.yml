@@ -29,6 +29,11 @@ jobs:
           EMAIL: ${{ secrets.USER_EMAIL }}
         run: make update-branch USER_NAME=$NAME USER_EMAIL=$EMAIL
 
+      - name: Check USER_NAME
+        env:
+          USER: ${{ secrets.USER_NAME }}
+        run: test -n "$USER" || (echo "USER_NAME is empty" && exit 1)
+
       - name: Check HF_TOKEN
         env:
           HF: ${{ secrets.HF_TEST }}
