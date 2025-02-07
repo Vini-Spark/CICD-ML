@@ -1,9 +1,7 @@
 name: Continuous Deployment
 on:
-  workflow_call:
-    secrets:
-      hf_token:
-        required: true
+  push:
+    branches: [ "update" ]
 
   workflow_dispatch:
 
@@ -17,4 +15,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deployment To Hugging Face
-        run: make deploy HF=${{ secrets.hf_token }}
+        run: make deploy HF=${{ secrets.HF_TOKEN }}
