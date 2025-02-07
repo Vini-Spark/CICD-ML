@@ -25,9 +25,9 @@ update-branch:
 
 hf-login:
 		pip install -U "huggingface_hub[cli]"
-		git pull --no-edit origin update  # Auto-merge without opening an editor
+		git pull origin update
 		git switch update
-		huggingface-cli login --token $(HF)  --add-to-git-credential
+		huggingface-cli login --token $(HF) --add-to-git-credential
 
 push-hub:
 		huggingface-cli upload ViniSpark/Drug-Classification ./App --repo-type=space --commit-message="Sync App files"
