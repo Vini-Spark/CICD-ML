@@ -9,6 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Check HF_TOKEN
+        run: test -n "$HF_TOKEN" || (echo "HF_TOKEN is empty" && exit 1)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          
       - uses: actions/checkout@v3
       - name: Deployment To Hugging Face
         run: make deploy HF=${{ secrets.HF_TOKEN }}

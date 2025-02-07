@@ -28,6 +28,12 @@ jobs:
           NAME: ${{ secrets.USER_NAME }}
           EMAIL: ${{ secrets.USER_EMAIL }}
         run: make update-branch USER_NAME=$NAME USER_EMAIL=$EMAIL
+
+      - name: Check HF_TOKEN
+        run: test -n "$HF_TOKEN" || (echo "HF_TOKEN is empty" && exit 1)
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          
   deploy:
     needs: build
     uses: ./.github/workflows/cd.yml
