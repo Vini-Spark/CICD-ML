@@ -1,7 +1,7 @@
 name: Continuous Deployment
 on:
   push:
-    branches: [ "update" ]
+    branches: [ "main" ]
 
   workflow_dispatch:
 
