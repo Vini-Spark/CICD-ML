@@ -7,15 +7,23 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required to push changes and check out branches
+
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/ci.yml
-        secrets: inherit
+      - name: Checkout update branch
+        uses: actions/checkout@v3
+        with:
+          ref: update  # Check out the 'update' branch
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure permissions to fetch the branch
 
+      - name: Install dependencies
+        run: make install
+        
       - name: Deployment To Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
