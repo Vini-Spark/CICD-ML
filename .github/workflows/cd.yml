@@ -1,9 +1,10 @@
 name: Continuous Deployment
 on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
-    types:
-      - completed 
+  workflow_call:
+    inputs:
+      hf_token:
+        type: string
+        required: true
 
   workflow_dispatch:
 
@@ -15,16 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout update branch
-        uses: actions/checkout@v3
-        with:
-          ref: update  # Check out the 'update' branch
-          token: ${{ secrets.GITHUB_TOKEN }}  # Ensure permissions to fetch the branch
-
-      - name: Install dependencies
-        run: make install
-        
+      - uses: actions/checkout@v3
       - name: Deployment To Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: make deploy HF=$HF_TOKEN
+        run: make deploy HF=${{ inputs.hf_token }}

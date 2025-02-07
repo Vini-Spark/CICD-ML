@@ -2,11 +2,11 @@ name: Continuous Integration
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+
   workflow_dispatch:
   
 permissions: write-all
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,5 +29,10 @@ jobs:
           EMAIL: ${{ secrets.USER_EMAIL }}
         run: make update-branch USER_NAME=$NAME USER_EMAIL=$EMAIL
 
+  deploy:
+    needs: build
+    uses: ./.github/workflows/cd.yml
+    with:
+      hf_token: ${{ secrets.HF_TOKEN }}
 
     
